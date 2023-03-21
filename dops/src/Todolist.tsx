@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {FilterValuesType, TasksType} from './App';
+import {Button} from "./components/Button";
 
 
 // export type TaskType = {
@@ -22,6 +23,7 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
+
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
@@ -30,27 +32,33 @@ export function Todolist(props: PropsType) {
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
-        if (e.charCode === 13) {
-            // addTask();
+        if (e.key === 'Enter') {
+            props.addTask(title, props.id);
         }
+    }
+
+    const removeTodolistHandler = () => {
+        props.removeTodolist(props.id)
+    }
+
+    const addTaskHandler = () => {
+        props.addTask(title, props.id)
     }
 
 
     return <div>
         <h3> {props.title}
-            <button onClick={() => {
-                'removeTodolist'
-            }}>x
-            </button>
-
+            {/*<button onClick={() => {'removeTodolist'}}>x</button>*/}
+            <Button name={'x'} callback={removeTodolistHandler}/>
         </h3>
         <div>
             <input value={title}
                    onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
+                   onKeyDown={onKeyPressHandler}
                    className={error ? "error" : ""}
             />
-            <button onClick={() => {'addTask'}}>+</button>
+            {/*<button onClick={() => {'addTask'}}>+</button>*/}
+            <Button name={'+'} callback={addTaskHandler}/>
             {error && <div className="error-message">{error}</div>}
         </div>
         <ul>
@@ -64,20 +72,26 @@ export function Todolist(props: PropsType) {
                     return <li key={t.taskId} className={t.isDone ? "is-done" : ""}>
                         <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
                         <span>{t.title}</span>
-                        <button onClick={() => {'removeTask'}}>x</button>
+                        <button onClick={() => {
+                            'removeTask'
+                        }}>x
+                        </button>
                     </li>
                 })
             }
         </ul>
         <div>
             <button className={props.filter === 'all' ? "active-filter" : ""}
-                    onClick={()=>{}}>All
+                    onClick={() => {
+                    }}>All
             </button>
             <button className={props.filter === 'active' ? "active-filter" : ""}
-                    onClick={()=>{}}>Active
+                    onClick={() => {
+                    }}>Active
             </button>
             <button className={props.filter === 'completed' ? "active-filter" : ""}
-                    onClick={()=>{}}>Completed
+                    onClick={() => {
+                    }}>Completed
             </button>
         </div>
         <p></p>
