@@ -51,6 +51,12 @@ export function Todolist(props: PropsType) {
         props.changeFilter(value, props.id)
     }
 
+    const classNameHandler= (value: FilterValuesType) => {
+       return(
+           props.filter === value? "active-filter" : ""
+       )
+    }
+
     return <div>
         <h3> {props.title}
             {/*<button onClick={() => {'removeTodolist'}}>x</button>*/}
@@ -72,12 +78,9 @@ export function Todolist(props: PropsType) {
             changeTaskStatus={props.changeTaskStatus}
             removeTask={props.removeTask}/>
         <div>
-            <div className={props.filter === 'all' ? 'active-filter' : ''}>
-                <Button name={'All'} callback={() => changeFilterHandler('all')}/>
-            </div>
-
-            <Button name={'Active'} callback={() => changeFilterHandler('active')}/>
-            <Button name={'Completed'} callback={() => changeFilterHandler('completed')}/>
+            <Button className={classNameHandler('all')} name={'All'} callback={() => changeFilterHandler('all')}/>
+            <Button className={classNameHandler('active')} name={'Active'} callback={() => changeFilterHandler('active')}/>
+            <Button className={classNameHandler('completed')} name={'Completed'} callback={() => changeFilterHandler('completed')}/>
             {/* <button className={props.filter === 'all' ? "active-filter" : ""}
                     onClick={() => {
                     }}>All
