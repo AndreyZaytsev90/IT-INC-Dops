@@ -46,9 +46,23 @@ export function Todolist(props: PropsType) {
         setTitle('')
     }
 
-    const removeTaskHandler = (taskId: string) => {
-        props.removeTask(taskId, props.id)
-    }
+    const tasksMapped = props.tasks.map(t => {
+        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+            let newIsDoneValue = e.currentTarget.checked;
+            props.changeTaskStatus(t.taskId, newIsDoneValue, props.id);
+        }
+
+        const removeTaskHandler = () => {
+            props.removeTask(t.taskId, props.id)
+        }
+
+        return <li key={t.taskId} className={t.isDone ? "is-done" : ""}>
+            <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
+            <span>{t.title}</span>
+            {/*<button onClick={() => {'removeTask'}}>x</button>*/}
+            <Button name={'x'} callback={removeTaskHandler}/>
+        </li>
+    })
 
 
     return <div>
@@ -66,23 +80,7 @@ export function Todolist(props: PropsType) {
             <Button name={'+'} callback={addTaskHandler}/>
             {error && <div className="error-message">{error}</div>}
         </div>
-        <ul>
-            {
-                props.tasks.map(t => {
-                    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        let newIsDoneValue = e.currentTarget.checked;
-                        props.changeTaskStatus(t.taskId, newIsDoneValue, props.id);
-                    }
-
-                    return <li key={t.taskId} className={t.isDone ? "is-done" : ""}>
-                        <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
-                        <span>{t.title}</span>
-                        {/*<button onClick={() => {'removeTask'}}>x</button>*/}
-                        <Button name={'x'} callback={()=>removeTaskHandler(t.taskId)}/>
-                    </li>
-                })
-            }
-        </ul>
+        <ul>{tasksMapped}</ul>
         <div>
             <button className={props.filter === 'all' ? "active-filter" : ""}
                     onClick={() => {
