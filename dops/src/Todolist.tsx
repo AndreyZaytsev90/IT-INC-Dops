@@ -47,24 +47,9 @@ export function Todolist(props: PropsType) {
         setTitle('')
     }
 
-    /*const tasksMapped = props.tasks.map(t => {
-        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            let newIsDoneValue = e.currentTarget.checked;
-            props.changeTaskStatus(t.taskId, newIsDoneValue, props.id);
-        }
-
-        const removeTaskHandler = () => {
-            props.removeTask(t.taskId, props.id)
-        }
-
-        return <li key={t.taskId} className={t.isDone ? "is-done" : ""}>
-            <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
-            <span>{t.title}</span>
-            {/!*<button onClick={() => {'removeTask'}}>x</button>*!/}
-            <Button name={'x'} callback={removeTaskHandler}/>
-        </li>
-    })*/
-
+    const changeFilterHandler = (value: FilterValuesType) => {
+        props.changeFilter(value, props.id)
+    }
 
     return <div>
         <h3> {props.title}
@@ -87,7 +72,13 @@ export function Todolist(props: PropsType) {
             changeTaskStatus={props.changeTaskStatus}
             removeTask={props.removeTask}/>
         <div>
-            <button className={props.filter === 'all' ? "active-filter" : ""}
+            <div className={props.filter === 'all' ? 'active-filter' : ''}>
+                <Button name={'All'} callback={() => changeFilterHandler('all')}/>
+            </div>
+
+            <Button name={'Active'} callback={() => changeFilterHandler('active')}/>
+            <Button name={'Completed'} callback={() => changeFilterHandler('completed')}/>
+            {/* <button className={props.filter === 'all' ? "active-filter" : ""}
                     onClick={() => {
                     }}>All
             </button>
@@ -98,7 +89,7 @@ export function Todolist(props: PropsType) {
             <button className={props.filter === 'completed' ? "active-filter" : ""}
                     onClick={() => {
                     }}>Completed
-            </button>
+            </button>*/}
         </div>
         <p></p>
         {
