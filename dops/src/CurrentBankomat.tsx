@@ -9,6 +9,8 @@ export const CurrentBankomat = (props:CurrentBankomatPropsType) => {
     return (
         <div>
             {props.money.banknotes}
+            {props.money.value}
+            {props.money.number}
         </div>
     );
 };
