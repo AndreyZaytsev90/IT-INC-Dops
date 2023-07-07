@@ -1,6 +1,6 @@
 import React from 'react';
 import {MoneyType} from "./App";
-import styled from "styled-components";
+import {S} from './CurrentBankomat_styles'
 
 type CurrentBankomatPropsType = {
     money: MoneyType
@@ -8,37 +8,15 @@ type CurrentBankomatPropsType = {
 export const CurrentBankomat = (props: CurrentBankomatPropsType) => {
 
     return (
-        <Banknotes color={props.money.banknotes === 'Dollars' ? 'palegreen' : 'deepskyblue'}>
-            <Name>{props.money.banknotes}</Name>
-            <Nominal>{props.money.value}</Nominal>
-        </Banknotes>
+        <S.Banknotes color={props.money.banknotes === 'Dollars' ? 'palegreen' : 'deepskyblue'}>
+            <S.Name>{props.money.banknotes}</S.Name>
+            <S.Nominal>{props.money.value}</S.Nominal>
+        </S.Banknotes>
     );
 };
 
 
-const Banknotes = styled.div`
-  background-color: ${props => {
-    /*if (props.color === 'palegreen') return 'palegreen'
-    return 'deepskyblue'*/
-    return props.color
-  }};
-  width: 400px;
-  height: 200px;
-  margin: 10px;
-`
 
-const Name = styled.span`
-  display: flex;
-  justify-content: center;
-  font-size: 30px;
-  margin-top: 20px;
-`
-
-const Nominal = styled.span`
-  display: flex;
-  justify-content: center;
-  font-size: 90px;
-`
 
 
 //-------------------------------------------------------------
