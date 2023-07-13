@@ -1,4 +1,4 @@
-import React, {ChangeEvent, RefObject, useState} from 'react';
+import React, {RefObject} from 'react';
 
 export type InputPropsType = {
     title: RefObject<HTMLInputElement>
