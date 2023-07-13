@@ -1,26 +1,40 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, RefObject, useState} from 'react';
 
-type InputPropsType = {
-    callback: () => void
+export type InputPropsType = {
+    title: RefObject<HTMLInputElement>
+    //setNewTitle: (title: string) => void
 }
 
 export const Input = (props: InputPropsType) => {
 
-    const [newTitle, setNewTitle] = useState('')
+    /*const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        props.setNewTitle(e.currentTarget.value)
+    }*/
+
+    return (
+      /*  <input type="text" value={props.title} onChange={onChangeHandler}/>*/
+        <input ref={props.title}/>
+    );
+};
+
+
+//----------------------------------------------------
+
+/*
+import React, {ChangeEvent, useState} from 'react';
+
+export type InputPropsType = {
+    title: string
+    setNewTitle: (title: string) => void
+}
+
+export const Input = (props: InputPropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTitle(e.currentTarget.value)
-
-    }
-    const onClickHandler = () => {
-        props.callback()
+        props.setNewTitle(e.currentTarget.value)
     }
 
     return (
-        <span>
-             <input type="text" value={newTitle} onChange={onChangeHandler}/>
-            <button onClick={onClickHandler}>+</button>
-        </span>
-
+        <input type="text" value={props.title} onChange={onChangeHandler}/>
     );
-};
+};*/
