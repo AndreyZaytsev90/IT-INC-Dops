@@ -4,7 +4,7 @@ import {Country} from "./Country";
 
 // На собесе от меня буду ждать моих размышлений, а не готовый результат
 
-export type BanknotsType = 'Dollars' | 'RUBLS'| 'All'// создадим типы для banknotes -он может быть 'Dollars', 'RUBLS' или 'All'
+export type BanknotsType = 'Dollars' | 'RUBLS' | 'All'// создадим типы для banknotes -он может быть 'Dollars', 'RUBLS' или 'All'
 export type MoneyType = {
     banknotes: BanknotsType
     value: number// не ленимся, убираем заглушку, и пишем правильный тип)
@@ -26,7 +26,14 @@ let defaultMoney: MoneyType[] = [  // типизируем
 export const moneyFilter = (money: MoneyType[], filter: BanknotsType): MoneyType[] => {
     //если пришел filter со значением 'All', то возвращаем все банкноты
     //return money.filter... ну да, придется фильтровать
-    return money.filter(m => m.banknotes === filter ? m : {...m, banknotes: filter})
+    return filter === 'RUBLS'
+        ? money.filter(m => m.banknotes === 'RUBLS')
+        : filter === 'Dollars'
+            ? money.filter(m => m.banknotes === 'Dollars')
+            : defaultMoney
+    /* return filter === 'All'
+         ? money
+         : money.filter(m => m.banknotes === filter);*/
 }
 
 function App() {
@@ -37,6 +44,8 @@ function App() {
     // а вот сейчас притормаживаем. И вдумчиво: константа filteredMoney получает результат функции moneyFilter
     // в функцию передаем деньги и фильтр, по которому ихбудем выдавать(ретёрнуть)
     const filteredMoney = moneyFilter(money, filterValue)
+
+    console.log(filterValue)
     return (
         <div className="App">
             <Country

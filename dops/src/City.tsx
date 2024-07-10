@@ -1,28 +1,36 @@
 import React from 'react';
 import {CurrentBankomat} from "./CurrentBankomat";
 import {MoneyType} from "./App";
+import {findAllByDisplayValue} from "@testing-library/react";
+import styled from "styled-components";
 
 type CityPropsType = {
-    data: any //встречаем денюжки
+    data: MoneyType[] //встречаем денюжки
 }
 
-export const City = (props: CityPropsType) => {
+export const City = ({data}: CityPropsType) => {
 
     // пока это пропускам
-    // const mappedMoney = props.data.map((el: MoneyType, index) => (
-    //     <CurrentBankomat
-    //         key={index}
-    //         money={el}
-    //     />
-    // ))
+    const mappedMoney = data.map((el: MoneyType, index) => (
+         <CurrentBankomat
+             key={index}
+             money={el}
+        />
+     ))
+/*    const mappedMoney = data.map((el)=> {
+        return (
+            <>
+                <div>{el.value}</div>
+                <div>{el.banknotes}</div>
+            </>
+        )
+    })*/
 
 
     return (
-        <div>
-            <div>Ну все парни, мапимся -выводим наши денюжки</div>
-            <div>На верстку ПОКА не обращаем внимания , сейчас занимаемся логикой</div>
-            {/*<div>{mappedMoney}</div>*/}
-        </div>
+        <Wrapper>
+            {mappedMoney}
+        </Wrapper>
     );
 };
 //1
@@ -39,3 +47,11 @@ export const City = (props: CityPropsType) => {
 // Вроде все норм, ну точнее почти норм- дублирование-это грех. Хотелось бы от него избавиться.
 // И StyledComponents нам в этом отлично поможет, ведь он может принимать пропсы!
 // Как это сделать в документашке
+
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size:  30px;
+`
