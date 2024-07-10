@@ -1,73 +1,67 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Country} from "./Country";
+import {Button} from "./Button";
 
-// На собесе от меня буду ждать моих размышлений, а не готовый результат
-
-//yarn start =>
-// package.json script =>
-// index.html <div id="root"></div> =>
-// index.tsx =>
-// App.tsx =>
-// Собираем JSX со всех компонентов =>
-// отдаем в компилятор Babel =>
-// Переводится JSX в JS для VirtualDOM и сравнение со вторым VirtualDOM(если есть изменение)=>
-// DOM =>
-// отрисовка
-
-export type BanknotsType = 'Dollars' | 'RUBLS' | 'All'// создадим типы для banknotes -он может быть 'Dollars', 'RUBLS' или 'All'
-export type MoneyType = {
-    banknotes: BanknotsType
-    value: number// не ленимся, убираем заглушку, и пишем правильный тип)
-    number: string// ложку за Димыча, за...
-}
-
-let defaultMoney: MoneyType[] = [  // типизируем
-    {banknotes: 'Dollars', value: 100, number: ' a1234567890'},
-    {banknotes: 'Dollars', value: 50, number: ' z1234567890'},
-    {banknotes: 'RUBLS', value: 100, number: ' w1234567890'},
-    {banknotes: 'Dollars', value: 100, number: ' e1234567890'},
-    {banknotes: 'Dollars', value: 50, number: ' c1234567890'},
-    {banknotes: 'RUBLS', value: 100, number: ' r1234567890'},
-    {banknotes: 'Dollars', value: 50, number: ' x1234567890'},
-    {banknotes: 'RUBLS', value: 50, number: ' v1234567890'},
-]
-
-// типизируем на входе и выходе
-export const moneyFilter = (money: MoneyType[], filter: BanknotsType): MoneyType[] => {
-    //если пришел filter со значением 'All', то возвращаем все банкноты
-    //return money.filter... ну да, придется фильтровать
-    return filter === 'RUBLS'
-        ? money.filter(m => m.banknotes === 'RUBLS')
-        : filter === 'Dollars'
-            ? money.filter(m => m.banknotes === 'Dollars')
-            : defaultMoney
-    /* return filter === 'All'
-         ? money
-         : money.filter(m => m.banknotes === filter);*/
+type TodosType = {
+    userId: number,
+    id: number,
+    title: string,
+    completed: boolean
 }
 
 function App() {
-    // убираем заглушки в типизации и вставляем в качестве инициализационного значения defaultMoney
-    const [money, setMoney] = useState<MoneyType[]>(defaultMoney)
-    const [filterValue, setFilterValue] = useState<BanknotsType>('All')   // по умолчанию указываем все банкноты
+    const [todos, setTodos] = useState<TodosType[]>([]);
+    const [shouldFetch, setShouldFetch] = useState(false);
+    /*   const [shouldFetch, setShouldFetch] = useState(false);
 
-    // а вот сейчас притормаживаем. И вдумчиво: константа filteredMoney получает результат функции moneyFilter
-    // в функцию передаем деньги и фильтр, по которому ихбудем выдавать(ретёрнуть)
-    const filteredMoney = moneyFilter(money, filterValue)
+       useEffect(() => {
+           if (shouldFetch) {
+               fetch('https://jsonplaceholder.typicode.com/todos')
+                   .then(response => response.json())
+                   .then(json => {
+                       setTodos(json);
+                       setShouldFetch(false);
+                   });
+           }
+       }, [shouldFetch]);
 
-    console.log(filterValue)
+       const onClickGetTodosHandler = () => {
+           setShouldFetch(true);
+       };*/
+    const onClickGetTodosHandler = () => {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(json => {
+                setTodos(json)
+                setShouldFetch(true)
+            });
+    }
+
+    const onClickRollbackHandler = () => {
+        setShouldFetch(false)
+    }
+
+
     return (
         <div className="App">
-            <Country
-                data={filteredMoney}   //отрисовать будем деньги после фильтрации
-                setFilterValue={setFilterValue}  //useState передаем? Так можно было?!
-            />
+            {
+                !shouldFetch
+                ? <Button name="Get todos" callback={onClickGetTodosHandler}/>
+                : <div>
+                    <Button name="Rollback" callback={onClickRollbackHandler}/>
+                    <ul>
+                        {todos.map((el, index) => (
+                            <li key={el.id}>
+                                <span>{index + 1} - </span>
+                                <span>{el.title}</span>
+                                <input type="checkbox" checked={el.completed} readOnly/>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            }
         </div>
     );
 }
-
-// Итого: в этой компоненте у нас мозги. А вот отрисовка где-то глубже. Погружаемся в Country
-
 
 export default App;
