@@ -8,31 +8,18 @@ type CurrentBankomatPropsType = {
 export const CurrentBankomat = ({money}: CurrentBankomatPropsType) => {
 
     return (
-        <>
-            {money.banknotes === 'Dollars'
-                ? <BanknoteGreen>
+                <Banknote colors = {money.banknotes === "Dollars" ? "greenyellow" : "deepskyblue"}>
                     <Name>{money.banknotes}</Name>
                     <Value>{money.value}</Value>
-                </BanknoteGreen>
-                : <BanknoteBlue>
-                    <Name>{money.banknotes}</Name>
-                    <Value>{money.value}</Value>
-                </BanknoteBlue>
-            }
-        </>
-    );
-};
+                </Banknote>
+    )}
 
-const BanknoteGreen = styled.div`
-  background-color: greenyellow;
-  width: 300px;
-  height: 150px;
-  margin: 10px;
-  border-radius: 10px;
-`
+type ColorType = {
+    colors: "greenyellow" | "deepskyblue"
+}
 
-const BanknoteBlue = styled.div`
-  background-color: #61dafb;
+const Banknote = styled.div<ColorType>`
+  background-color: ${props => props.colors};
   width: 300px;
   height: 150px;
   margin: 10px;
