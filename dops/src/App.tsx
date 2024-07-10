@@ -4,6 +4,17 @@ import {Country} from "./Country";
 
 // На собесе от меня буду ждать моих размышлений, а не готовый результат
 
+//yarn start =>
+// package.json script =>
+// index.html <div id="root"></div> =>
+// index.tsx =>
+// App.tsx =>
+// Собираем JSX со всех компонентов =>
+// отдаем в компилятор Babel =>
+// Переводится JSX в JS для VirtualDOM и сравнение со вторым VirtualDOM(если есть изменение)=>
+// DOM =>
+// отрисовка
+
 export type BanknotsType = 'Dollars' | 'RUBLS' | 'All'// создадим типы для banknotes -он может быть 'Dollars', 'RUBLS' или 'All'
 export type MoneyType = {
     banknotes: BanknotsType
