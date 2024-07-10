@@ -38,6 +38,7 @@ function App() {
     }
 
     const onClickRollbackHandler = () => {
+        //setTodos([])
         setShouldFetch(false)
     }
 
