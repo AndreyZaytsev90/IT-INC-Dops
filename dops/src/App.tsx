@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './App.css';
-import {Button} from "./Button";
+import {Button} from "./components/Button";
+import {Input} from "./components/Input";
 
 type TodosType = {
     userId: number,
@@ -12,6 +13,9 @@ type TodosType = {
 function App() {
     const [todos, setTodos] = useState<TodosType[]>([]);
     const [shouldFetch, setShouldFetch] = useState(false);
+    const [newTitle, setNewTitle] = useState<string>('')
+
+    console.log(todos)
     /*   const [shouldFetch, setShouldFetch] = useState(false);
 
        useEffect(() => {
@@ -42,24 +46,34 @@ function App() {
         setShouldFetch(false)
     }
 
+    const addNewTask = () => {
+        const newTask: TodosType = {userId: todos.length+1, id: todos.length+1, title: newTitle, completed: false}
+        setTodos([newTask, ...todos])
+        setNewTitle('')
+    }
+
 
     return (
-        <div className="App">
+        <div>
+            <div>
+                <Input newTitle={newTitle} setNewTitle={setNewTitle}/>
+                <Button name='+' callback={addNewTask}/>
+            </div>
             {
                 !shouldFetch
-                ? <Button name="Get todos" callback={onClickGetTodosHandler}/>
-                : <div>
-                    <Button name="Rollback" callback={onClickRollbackHandler}/>
-                    <ul>
-                        {todos.map((el, index) => (
-                            <li key={el.id}>
-                                <span>{index + 1} - </span>
-                                <span>{el.title}</span>
-                                <input type="checkbox" checked={el.completed} readOnly/>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                    ? <Button name="Get todos" callback={onClickGetTodosHandler}/>
+                    : <div>
+                        <Button name="Rollback" callback={onClickRollbackHandler}/>
+                        <ul>
+                            {todos.map((el, index) => (
+                                <li key={el.id}>
+                                    <span>{index + 1} - </span>
+                                    <span>{el.title}</span>
+                                    <input type="checkbox" checked={el.completed} readOnly/>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
             }
         </div>
     );
