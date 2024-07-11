@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {RefObject, useEffect, useRef, useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
 import {Input} from "./components/Input";
@@ -13,25 +13,9 @@ type TodosType = {
 function App() {
     const [todos, setTodos] = useState<TodosType[]>([]);
     const [shouldFetch, setShouldFetch] = useState(false);
-    const [newTitle, setNewTitle] = useState<string>('')
-
+    /*const [newTitle, setNewTitle] = useState<string>('')*/
+    const inputRef: RefObject<HTMLInputElement> = useRef(null);
     console.log(todos)
-    /*   const [shouldFetch, setShouldFetch] = useState(false);
-
-       useEffect(() => {
-           if (shouldFetch) {
-               fetch('https://jsonplaceholder.typicode.com/todos')
-                   .then(response => response.json())
-                   .then(json => {
-                       setTodos(json);
-                       setShouldFetch(false);
-                   });
-           }
-       }, [shouldFetch]);
-
-       const onClickGetTodosHandler = () => {
-           setShouldFetch(true);
-       };*/
     const onClickGetTodosHandler = () => {
         fetch('https://jsonplaceholder.typicode.com/todos')
             .then(response => response.json())
@@ -47,16 +31,24 @@ function App() {
     }
 
     const addNewTask = () => {
-        const newTask: TodosType = {userId: todos.length+1, id: todos.length+1, title: newTitle, completed: false}
-        setTodos([newTask, ...todos])
-        setNewTitle('')
+        if (inputRef.current){
+            const newTask: TodosType = {
+                userId: todos.length+1,
+                id: todos.length+1,
+                title: inputRef.current.value,
+                completed: false
+            }
+            setTodos([newTask, ...todos])
+            inputRef.current.value = ''
+            //setNewTitle('')
+        }
     }
-
 
     return (
         <div>
             <div>
-                <Input newTitle={newTitle} setNewTitle={setNewTitle}/>
+                <Input inputRef={inputRef}/>
+                {/*<Input newTitle={newTitle} setNewTitle={setNewTitle}/>*/}
                 <Button name='+' callback={addNewTask}/>
             </div>
             {
