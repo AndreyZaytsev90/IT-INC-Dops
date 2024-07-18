@@ -19,6 +19,9 @@
     font-size: 16px;
     cursor: pointer;
 }
+.stylesForSuperButton:hover{
+    background: #66aaf1;
+}
 
 .button {
     overflow: hidden;
