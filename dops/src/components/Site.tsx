@@ -7,6 +7,8 @@ import {Routes, Route, Navigate, NavLink} from "react-router-dom";
 import {Error404} from "./pages/Error404";
 //import styled from "styled-components";
 import {s} from "./pages/__styleds"
+import {Page} from "./pages/Page";
+import {data} from "../data/data";
 
 export const Site = () => {
     return (
@@ -15,12 +17,11 @@ export const Site = () => {
             <div className={styles.body}>
                 <div className={styles.nav}>
                     {/*<button><NavLink className={({isActive}) => isActive? styles.active: styles.navLink} to={'/page1'}>1</NavLink></button>*/}
-                    <s.NavWrapper><NavLink to={'/page1'}>1</NavLink></s.NavWrapper>
-                    <s.NavWrapper><NavLink to={'/page2'}>2</NavLink></s.NavWrapper>
-                    <s.NavWrapper><NavLink to={'/page3'}>3</NavLink></s.NavWrapper>
+                    <s.NavWrapper><NavLink to={'/page/0'}>1</NavLink></s.NavWrapper>
+                    <s.NavWrapper><NavLink to={'/page/1'}>2</NavLink></s.NavWrapper>
+                    <s.NavWrapper><NavLink to={'/page/2'}>3</NavLink></s.NavWrapper>
 
-
-                    <s.NavWrapper><a href='/page3'>href3</a></s.NavWrapper>
+                  {/*  <s.NavWrapper><a href='/page'>href3</a></s.NavWrapper>*/}
 
                 </div>
                 <div className={styles.content}>
@@ -28,10 +29,11 @@ export const Site = () => {
                         {/*  <Route path={'/'} element={<PageOne/>}></Route>*/}
                         <Route path={'/'} element={<Navigate to={'/page1'}/>}></Route>
 
+                        <Route path={'/page/:id'} element={<Page pages={data.pages}/>}></Route>
 
-                        <Route path={'/page1'} element={<PageOne/>}></Route>
+                       {/* <Route path={'/page1'} element={<PageOne/>}></Route>
                         <Route path={'/page2'} element={<PageTwo/>}></Route>
-                        <Route path={'/page3'} element={<PageThree/>}></Route>
+                        <Route path={'/page3'} element={<PageThree/>}></Route>*/}
 
                         {/* <Route path={'/*'} element={<Error404/>}></Route>*/}
                         <Route path={'/*'} element={<Navigate to={'/page404'}/>}></Route>
