@@ -17,9 +17,9 @@ export const Site = () => {
             <div className={styles.body}>
                 <div className={styles.nav}>
                     {/*<button><NavLink className={({isActive}) => isActive? styles.active: styles.navLink} to={'/page1'}>1</NavLink></button>*/}
-                    <s.NavWrapper><NavLink to={'/page/0'}>1</NavLink></s.NavWrapper>
-                    <s.NavWrapper><NavLink to={'/page/1'}>2</NavLink></s.NavWrapper>
-                    <s.NavWrapper><NavLink to={'/page/2'}>3</NavLink></s.NavWrapper>
+                    <s.NavWrapper><NavLink to={'/page/0/00'}>1</NavLink></s.NavWrapper>
+                    <s.NavWrapper><NavLink to={'/page/1/01'}>2</NavLink></s.NavWrapper>
+                    <s.NavWrapper><NavLink to={'/page/2/02'}>3</NavLink></s.NavWrapper>
 
                   {/*  <s.NavWrapper><a href='/page'>href3</a></s.NavWrapper>*/}
 
@@ -29,16 +29,16 @@ export const Site = () => {
                         {/*  <Route path={'/'} element={<PageOne/>}></Route>*/}
                         <Route path={'/'} element={<Navigate to={'/page1'}/>}></Route>
 
-                        <Route path={'/page/:id'} element={<Page pages={data.pages}/>}></Route>
+                        {/*<Route path={'/page/:id1'} element={<Page pages={data.pages}/>}></Route>*/}
+                        <Route path={'/page/:id1/:id2'} element={<Page pages={data.pages}/>}></Route>
 
                        {/* <Route path={'/page1'} element={<PageOne/>}></Route>
                         <Route path={'/page2'} element={<PageTwo/>}></Route>
                         <Route path={'/page3'} element={<PageThree/>}></Route>*/}
 
                         {/* <Route path={'/*'} element={<Error404/>}></Route>*/}
-                        <Route path={'/*'} element={<Navigate to={'/page404'}/>}></Route>
-                        <Route path={'/page404'} element={<Error404/>}></Route>
-
+                        <Route path={'/*'} element={<Navigate to={'/page/error'}/>}></Route>
+                        <Route path={'/page/error'} element={<Error404/>}></Route>
                     </Routes>
                 </div>
             </div>
