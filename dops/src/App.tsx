@@ -3,6 +3,10 @@ import './App.css';
 import { Todolist} from './Todolist';
 import {v1} from 'uuid';
 
+type TodolistType = ObjectType & {
+    todolistId: string
+}
+
 type ObjectType = {
 
     title: string
@@ -40,7 +44,7 @@ function App() {
     //     ]
     // });
 
-    const [todolists, setTodolists] = useState<ObjectType[]>([])
+    const [todolists, setTodolists] = useState<TodolistType[]>([])
 
   const todoFromServer: ObjectType[] =[
       {
@@ -161,9 +165,10 @@ function App() {
   ]
 
     useEffect(()=> {
-        if(todoFromServer) setTodolists(todoFromServer.map(el =>({...el, todolistId: v1()})))
-    },[])
+        if(todoFromServer) setTodolists(todoFromServer.map(el =>({todolistId: v1(), ...el})))
 
+    },[])
+    console.log(todolists)
     function removeTask(id: string, todolistId: string) {
       /*  //достанем нужный массив по todolistId:
         let todolistTasks = tasks[todolistId];
@@ -215,7 +220,6 @@ function App() {
                 todolists.map((tl, index) => {
                     let allTodolistTasks = tl.tasks;
                     let tasksForTodolist = allTodolistTasks;
-                    let todolistId = v1()
 
                     if (tl.filter === "active") {
                         tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
@@ -225,8 +229,8 @@ function App() {
                     }
 
                     return <Todolist
-                        key={todolistId}
-                        id={todolistId}
+                        key={tl.todolistId}
+                        id={tl.todolistId}
                         title={tl.title}
                         tasks={tasksForTodolist}
                         removeTask={removeTask}
