@@ -7,10 +7,17 @@ import {S} from "./components/pages/__styles";
 
 
 function App() {
+    const [logged, setLogged] = useState(false)
+    const onClickAuthHandler = () => {
+        setLogged(!logged)
+        console.log(logged)
+    }
+
     return (
         <div>
             <div className={styles.header}><h1>HEADER</h1></div>
            {/* <Site/>*/}
+            <button onClick={onClickAuthHandler}>Auth</button>
             <div className={styles.body}>
                 <div className={styles.nav}>
                     {/*<div><NavLink className={({isActive})=>isActive ?styles.active:styles.navLink} to={'/page1'}>Page1</NavLink></div>*/}

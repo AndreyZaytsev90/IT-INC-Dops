@@ -7,25 +7,39 @@ import {Site} from "../components/Site";
 import {ProtectedPage} from "../components/pages/ProtectedPage";
 import {ProtectedRoute} from "./ProtectedRoute";
 
+const paths = [
+    "/page/:id",
+    "/page/protected",
+    "/page/error"
+]
 export const router = createBrowserRouter([
+
+
+
     {
-        path:"/",
+        path: "/",
         element: <App/>,
         errorElement: <Error404/>,
         children: [ // <Outlet/>
             {
-                path: "/page/:id",
+                path: paths[0],
                 element: (
                     <Page pages={dataState.pages}/>
-                ),
+                )
             },
             {
-                path: "/page/protected",
-                element: (
+                path: paths[1],
+                element: ( // ProtectedRoute - условный шлагбаум (защита)
                     <ProtectedRoute>
                         <ProtectedPage/>
                     </ProtectedRoute>
-                ),
+                )
+            },
+            {
+                path: paths[2],
+                element: (
+                    <Error404/>
+                )
             },
         ],
     }
