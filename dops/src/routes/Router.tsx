@@ -6,11 +6,14 @@ import {Page} from "../components/pages/Page";
 import {Site} from "../components/Site";
 import {ProtectedPage} from "../components/pages/ProtectedPage";
 import {ProtectedRoute} from "./ProtectedRoute";
+import {PageInPage} from "../components/pages/PageInPage";
 
 const paths = [
     "/page/:id",
     "/page/protected",
-    "/page/error"
+    "/page/error",
+    "/page/:id/pip",
+
 ]
 export const router = createBrowserRouter([
 
@@ -25,6 +28,12 @@ export const router = createBrowserRouter([
                 path: paths[0],
                 element: (
                     <Page pages={dataState.pages}/>
+                )
+            },
+            {
+                path: paths[3],
+                element: (
+                    <PageInPage/>
                 )
             },
             {
