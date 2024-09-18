@@ -8,7 +8,7 @@ import {useWindowSize} from "./helpers/useWindowSize";
 
 
 function App() {
-    const [logged, setLogged] = useState(false)
+    const [logged, setLogged] = useState(true)
     const onClickAuthHandler = () => {
         setLogged(!logged)
         console.log(logged)
