@@ -3,7 +3,6 @@ import Component4 from './Component4';
 
 interface Component3Props {
     onCallback: () => void;
-
 }
 
 const Component3: React.FC<Component3Props> = ({ onCallback }) => {
@@ -11,13 +10,16 @@ const Component3: React.FC<Component3Props> = ({ onCallback }) => {
 
     const onClickHandler = () => {
         setIsGreen(!isGreen)
-        onCallback()
+       onCallback()
     }
 
     return (
         <div className="container">
             <div className={`circle ${isGreen ? 'green' : 'red'}`}></div>
-            <Component4 onCallback={onClickHandler}  />
+            <Component4
+                //onCallback={onClickHandler}
+                onCallback={onClickHandler}
+            />
         </div>
     );
 };

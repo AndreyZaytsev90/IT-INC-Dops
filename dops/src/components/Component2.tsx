@@ -16,7 +16,10 @@ const Component2: React.FC<Component2Props> = ({ onCallback }) => {
     return (
         <div className="container">
             <div className={`circle ${isGreen ? 'green' : 'red'}`}></div>
-            <Component3 onCallback={onClickHandler}  />
+            <Component3
+               // onCallback={onClickHandler}
+                onCallback={onClickHandler}
+            />
         </div>
     );
 };

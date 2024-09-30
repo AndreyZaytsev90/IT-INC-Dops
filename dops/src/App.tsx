@@ -9,13 +9,17 @@ function App() {
 
     const handleFinalCallback = () => {
         setAllGreen(true);
+        alert("Первый круг Ада пройден!")
     };
 
     return (
         <div className="App">
             <h1>Callback Hell</h1>
             <div className="container">
-                <Component1 onCallback={handleFinalCallback}/>
+                <Component1
+                   /* onCallback={handleFinalCallback}*/
+                   onCallback={handleFinalCallback}
+                />
             </div>
             {allGreen && <p>Первый круг Ада пройден!</p>}
         </div>
