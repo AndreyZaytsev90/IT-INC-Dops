@@ -1,10 +1,15 @@
 import React from 'react';
+/*import adidasModel1 from './../../assets/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp'*/
 import adidasModel1 from './../../assets/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp'
 import adidasModel2 from './../../assets/Superstar_XLG_Shoes_Black_IG9777_01_standard.webp'
 import adidasModel3
     from './../../assets/PostMove_Mid_Cloudfoam_Super_Lifestyle_Basketball_Mid_Classic_Shoes_Black_GY7163_01_standard.webp'
+import {NavLink, Route, Routes} from "react-router-dom";
+//import Model from "./Model";
+import {v4} from 'uuid';
 
 export type AdidasItem = {
+    id: string
     model: string;
     collection: string;
     price: string;
@@ -12,19 +17,21 @@ export type AdidasItem = {
 }
 export const adidasArr: AdidasItem[] = [
     {
+        id: v4(),
         model: 'ADIDAS ADIFOM TRXN',
         collection: 'new collection1',
         price: '100200$',
-        picture: adidasModel1,
-
+        picture: adidasModel1
     },
     {
+        id: v4(),
         model: 'ADIDAS ADIFOM SUPER',
         collection: 'new collection22',
         price: '200300$',
         picture: adidasModel2
     },
     {
+        id: v4(),
         model: 'ADIDAS SUPER SUPERSKI',
         collection: 'new collection333',
         price: '300400$',
@@ -32,10 +39,24 @@ export const adidasArr: AdidasItem[] = [
     }
 ]
 
-export const PageOne = () => {
+export const Adidas = () => {
     return (
         <div>
-            <h2 style={{textAlign: 'center'}}> ADIDAS</h2>
+            <h2 style={{textAlign: 'center'}}>ADIDAS</h2>
+            <div style={{display:"flex", justifyContent: "space-between", marginLeft: "15px"}}>
+            {adidasArr.map((item, i)=>{
+                return (
+                        <div key={item.id}>
+                            <div>Price: {item.price}</div>
+                            <div>{item.collection}</div>
+                            <div>{item.model}</div>
+                            <NavLink to={`/adidas/${item.id}`}>
+                                <img src={item.picture} alt="picture" width={200} height={200}/>
+                            </NavLink>
+                        </div>
+                )
+            })}
+            </div>
             <p>
                 What is Lorem Ipsum?
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -58,7 +79,6 @@ export const PageOne = () => {
                 as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
                 infancy. Various versions
                 have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
 
                 Where does it come from?
                 Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
