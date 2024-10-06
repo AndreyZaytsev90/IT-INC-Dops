@@ -3,8 +3,18 @@ import {adidasArr} from "./Adidas";
 import {useParams} from "react-router-dom";
 import {pumaArr} from "./Puma";
 
+type Sneakers = {
+    id: string
+    model: string;
+    collection: string;
+    price: string;
+    picture: string;
+}
+type ModelType = {
+    sneakers: Sneakers[]
+}
 
-const Model = () => {
+const Model = ({sneakers}: ModelType) => {
     /* console.log(adidasArr.map(i => i.id))*/
 
     const params = useParams()
@@ -14,8 +24,8 @@ const Model = () => {
     //console.log(adidasArr)
 
     const currentModel =
-        adidasArr.filter((i) => i.id == params.id) ||
-        pumaArr.filter((i) => i.id == params.id)
+       /* adidasArr.filter((i) => i.id == params.id) ||*/
+        sneakers.filter((i) => i.id == params.id)
 
     console.log(currentModel)
 
@@ -28,7 +38,7 @@ const Model = () => {
                         <div>{i.model}</div>
                         <div>{i.collection}</div>
                         <div>{i.price}</div>
-                        <img src={i.picture} alt={'адидас'}/>
+                        <img src={i.picture} alt={'image'}/>
                     </div>
                 )
             })}
