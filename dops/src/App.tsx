@@ -10,9 +10,10 @@ import Model from "./components/pages/Model";
 
 
 const PATH = {
-    PAGE1: '/adidas',
-    PAGE2: '/puma',
-    PAGE3: '/abibas',
+    PAGE1: '/:adidas',
+    PAGE2: '/:puma',
+    PAGE3: '/:abibas',
+    ID: ':id'
 } as const;
 
 
@@ -38,8 +39,8 @@ function App() {
                         <Route path={'/*'} element={<Error404/>}/>
                         {/*<Route path={'/adidas/*'} element={<Error404/>}/>*/}
 
-                        <Route path={'/adidas/:id'} element={<Model sneakers={adidasArr}/>}/>
-                        <Route path={'/puma/:id'} element={<Model sneakers={pumaArr}/>}/>
+                        <Route path={`/${PATH.PAGE1}/${PATH.ID}`} element={<Model sneakers={adidasArr}/>}/>
+                        <Route path={`/${PATH.PAGE2}/${PATH.ID}`} element={<Model sneakers={pumaArr}/>}/>
                     </Routes>
                 </div>
             </div>

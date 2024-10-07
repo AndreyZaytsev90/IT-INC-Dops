@@ -2,6 +2,7 @@ import React from 'react';
 import {adidasArr} from "./Adidas";
 import {useParams} from "react-router-dom";
 import {pumaArr} from "./Puma";
+import {Error404} from "./Error404";
 
 type Sneakers = {
     id: string
@@ -32,16 +33,19 @@ const Model = ({sneakers}: ModelType) => {
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", marginLeft: "15px"}}>
-            {currentModel.map((i) => {
-                return (
+            {currentModel.length === 0 ? (
+               /* <Error404 />*/
+                <h3>Такой модели не существует</h3>
+            ) : (
+                currentModel.map((i) => (
                     <div key={i.id}>
                         <div>{i.model}</div>
                         <div>{i.collection}</div>
                         <div>{i.price}</div>
-                        <img src={i.picture} alt={'image'}/>
+                        <img src={i.picture} alt={i.model} width={700} height={700}/>
                     </div>
-                )
-            })}
+                ))
+            )}
         </div>
     );
 };
