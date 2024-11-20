@@ -1,11 +1,9 @@
 import React from 'react';
-/*import adidasModel1 from './../../assets/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp'*/
 import adidasModel1 from './../../assets/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp'
 import adidasModel2 from './../../assets/Superstar_XLG_Shoes_Black_IG9777_01_standard.webp'
 import adidasModel3
     from './../../assets/PostMove_Mid_Cloudfoam_Super_Lifestyle_Basketball_Mid_Classic_Shoes_Black_GY7163_01_standard.webp'
-import {NavLink, Route, Routes} from "react-router-dom";
-//import Model from "./Model";
+import {NavLink} from "react-router-dom";
 import {v4} from 'uuid';
 
 export type AdidasItem = {
@@ -42,10 +40,10 @@ export const adidasArr: AdidasItem[] = [
 export const Adidas = () => {
     return (
         <div>
-            <h2 style={{textAlign: 'center'}}>ADIDAS</h2>
-            <div style={{display:"flex", justifyContent: "space-between", marginLeft: "15px"}}>
-            {adidasArr.map((item, i)=>{
-                return (
+            <h2 style={{display: "flex", justifyContent: "space-between", marginLeft: "15px"}}>ADIDAS</h2>
+            <div style={{display: "flex", justifyContent: "space-between", marginLeft: "15px"}}>
+                {adidasArr.map((item, i) => {
+                    return (
                         <div key={item.id}>
                             <div>Price: {item.price}</div>
                             <div>{item.collection}</div>
@@ -54,45 +52,19 @@ export const Adidas = () => {
                                 <img src={item.picture} alt="picture" width={200} height={200}/>
                             </NavLink>
                         </div>
-                )
-            })}
+                    )
+                })}
             </div>
-            <p>
-                What is Lorem Ipsum?
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard
-                dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                a type specimen book.
-                It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-                essentially unchanged.
-                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-                more recently
-                with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <p style={{display: "flex", justifyContent: "space-between", marginLeft: "15px"}}>
+                The Dassler brothers start producing sports shoes. Adolf Dassler (Adi) registers the Adidas company. The
+                German football team, dressed in Adidas, wins the World Cup. The company expands its range to include
+                clothing and accessories. Adidas becomes a global leader in the sports industry. Introduces innovative
+                technologies. Acquires the Salomon company to expand into the winter sports market. Conducts a
+                rebranding and develops online sales. Focuses on fashionable and ultra-modern designs. Invests in
+                digital technologies and sustainable production.
 
-                Why do we use it?
-                It is a long established fact that a reader will be distracted by the readable content of a page when
-                looking at its layout.
-                The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed
-                to using 'Content here,
-                content here', making it look like readable English. Many desktop publishing packages and web page
-                editors now use Lorem Ipsum
-                as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-                infancy. Various versions
-                have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-                Where does it come from?
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                Latin literature from 45 BC,
-                making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in
-                Virginia, looked up one of the
-                more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the
-                word in classical literature,
-                discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                Bonorum et Malorum"
-                (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of
-                ethics, very popular during the
-                Renaissance.
-                The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                Today, Adidas is one of the largest global brands in sports clothing and footwear, known for its
+                innovative technology, fashionable design solutions, and strong brand culture.
             </p>
         </div>
     );

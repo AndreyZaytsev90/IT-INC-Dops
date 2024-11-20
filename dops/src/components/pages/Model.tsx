@@ -1,8 +1,5 @@
 import React from 'react';
-import {adidasArr} from "./Adidas";
 import {useParams} from "react-router-dom";
-import {pumaArr} from "./Puma";
-import {Error404} from "./Error404";
 
 type Sneakers = {
     id: string
@@ -23,10 +20,9 @@ const Model = ({sneakers}: ModelType) => {
     console.log(typeof adidasArr[0].id)*/
 
     //console.log(adidasArr)
-
-    const currentModel =
+    console.log(params)
+    const currentModel = sneakers.filter((i) => i.id == params.id)
        /* adidasArr.filter((i) => i.id == params.id) ||*/
-        sneakers.filter((i) => i.id == params.id)
 
     console.log(currentModel)
 

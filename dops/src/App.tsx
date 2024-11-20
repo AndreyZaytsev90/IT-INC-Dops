@@ -7,13 +7,15 @@ import {Abibas} from "./components/pages/Abibas";
 import styles from "./components/Site.module.css";
 import {S} from './components/pages/_styles';
 import Model from "./components/pages/Model";
+import {Prices} from "./components/pages/Prices";
 
 
 const PATH = {
-    PAGE1: '/:adidas',
-    PAGE2: '/:puma',
-    PAGE3: '/:abibas',
-    ID: ':id'
+    PAGE1: '/adidas',
+    PAGE2: '/puma',
+    PAGE3: '/abibas',
+    ID: ':id',
+    PAGE4: '/prices'
 } as const;
 
 
@@ -26,6 +28,7 @@ function App() {
                     <S.NavWrapper><NavLink to={PATH.PAGE1}>Adidas</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PAGE2}>Puma</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PAGE3}>Abibas</NavLink></S.NavWrapper>
+                    <S.NavWrapper><NavLink to={PATH.PAGE4}>Prices</NavLink></S.NavWrapper>
                     <a href="page3">page3 HTML</a>
                 </div>
                 <div className={styles.content}>
@@ -35,8 +38,10 @@ function App() {
                         <Route path={PATH.PAGE1} element={<Adidas/>}/>
                         <Route path={PATH.PAGE2} element={<Puma/>}/>
                         <Route path={PATH.PAGE3} element={<Abibas/>}/>
+                        <Route path={PATH.PAGE4} element={<Prices/>}/>
 
                         <Route path={'/*'} element={<Error404/>}/>
+
                         {/*<Route path={'/adidas/*'} element={<Error404/>}/>*/}
 
                         <Route path={`/${PATH.PAGE1}/${PATH.ID}`} element={<Model sneakers={adidasArr}/>}/>
