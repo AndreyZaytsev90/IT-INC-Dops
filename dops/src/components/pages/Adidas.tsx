@@ -66,6 +66,7 @@ export const Adidas = () => {
                 Today, Adidas is one of the largest global brands in sports clothing and footwear, known for its
                 innovative technology, fashionable design solutions, and strong brand culture.
             </p>
+
         </div>
     );
 };
